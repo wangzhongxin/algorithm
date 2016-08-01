@@ -1,0 +1,9 @@
+// Windows executeable file
+*.exe
+
+// Linux/osx file
+*.out
+
+// Common file 
+*.o
+*.obj
