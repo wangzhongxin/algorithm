@@ -11,3 +11,5 @@
 // tmp file
 *~
 temp/
+*.dot
+*.png
