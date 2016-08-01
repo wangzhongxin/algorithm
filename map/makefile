@@ -1,4 +1,4 @@
-Dijkstra : Dijkstra.cpp
+Dijkstra.out : Dijkstra.cpp
 	g++ Dijkstra.cpp -o Dijkstra.out -std=c++11 
 
 png:
