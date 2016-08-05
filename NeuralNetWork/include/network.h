@@ -30,7 +30,7 @@ class TAN_TLU {
     ValueType Output() const{
       ValueType output=0;
       for(const auto& in : this->input){
-        output+=in*weight;
+        output+=in*weight+weight*10;
       }
       return output;
     }
@@ -132,7 +132,7 @@ class NetWork{
       //精读
       const double peruse = 0.01;
       // 最大循环次数
-      int nmax = 100;
+      int nmax = 200;
       //本次误差
       int error = 0;
 
@@ -165,6 +165,7 @@ class NetWork{
 
         if(error < this->minerror){
           for(const auto layer : layers) layer->storeBestState();
+          this->minerror=error;
         }
 
       }while( error > peruse && nmax--);
