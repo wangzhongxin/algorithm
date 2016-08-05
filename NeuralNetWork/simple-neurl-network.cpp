@@ -10,15 +10,16 @@ using std::vector;
 using std::cout;
 
 int main(){
-  srand(time(0));
 
+  srandom(time(0));
   NetWork<double> mynetwork;
   mynetwork.addLayer((new Layer<double>)->addNodes(1));
+  mynetwork.addLayer((new Layer<double>)->addNodes(3));
   mynetwork.addLayer((new Layer<double>)->addNodes(3));
   mynetwork.addLayer((new Layer<double>)->addNodes(1));
 
   mynetwork.begin();
-  for(int i=1;i<10000;++i){
+  for(int i=2;i<10000;++i){
     vector<double> in = {i*1.0};
     vector<double> out = {sqrt(i)};
     mynetwork.train(in,out);
@@ -29,7 +30,7 @@ int main(){
   for(int i=1;i<10;++i){
     vector<double> in = { i*30.0 };
     double out = mynetwork.Input(in)[0];
-    cout<<" input " << i*30 << " and output "<< out << "and error is:"<<sqrt(i*30)-out <<endl;
+    cout<<" input " << i*30 << " and output "<< out << " and error is:"<<sqrt(in[0])-out <<endl;
   }
 
   cout << "done"<<endl;
