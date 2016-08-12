@@ -6,5 +6,6 @@ The ropository is my edit some algorithm code.
 ## Algorithm list
 
 * `KMP` ./KMP.cpp
+* `QuickSort` ./quick_sort.cpp
 * `BinarySearch` ./binary-tree/binary-sort.cpp
 * `Dijkstra` ./map/Dijkstra.cpp
