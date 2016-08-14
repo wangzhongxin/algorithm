@@ -2,20 +2,22 @@
 # include "./include/red-black-node.h"
 # include "./include/dot.h"
 
-using std::endl;
 using std::cout;
+using std::endl;
 
 int main(){
-  int array[] ={1,2,3,4,5,6,7};
   red_black_node<int>* root=NULL;
+  int array[]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,0};
 
-  for(int i=0;i<sizeof(array)/sizeof(int);++i){
-    if(!root) root=new red_black_node<int>(array[i],BLACK);
-    else root = root->insert(new red_black_node<int>(array[i],RED));
+  for(int i: array){
+    if(!root) root=new red_black_node<int>(i,BLACK);
+    else root = root->insert(new red_black_node<int>(i,RED));
   }
 
-  createDotFile("mytree.dot",root);
+  //then we will print this tree
+  createDotFile("mydot.dot",root);
 
-  cout << " done !" <<endl;
+  cout << "done!" <<endl;
+
   return 0;
 }

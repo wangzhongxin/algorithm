@@ -1,8 +1,8 @@
 
 # pragma once
 
-# define RED 1
-# define BLACK 0
+# define RED 0
+# define BLACK 1
 
 template<class T>
 class red_black_node{
@@ -13,10 +13,10 @@ class red_black_node{
     red_black_node* parent;
     T value;
   public:
-    red_black_node(T value,int color):value(value),color(color),left(0),right(0),parent(0){
+    red_black_node(T value,int color):color(color),value(value),left(0),right(0),parent(0){
     }
 
-    red_black_node* Left() const {
+    red_black_node* Left() const{
       return left;
     }
 
@@ -24,111 +24,132 @@ class red_black_node{
       return right;
     }
 
-    T Value() const{
-      return value;
+    red_black_node* Parent() const{
+      return parent;
     }
-    
+
     int Color() const{
       return color;
     }
 
-    red_black_node* insert(red_black_node* newnode){
+    T Value() const{
+      return value;
+    }
+
+    red_black_node* insert(red_black_node* newnode) {
       if(this->value > newnode->value){
-        if(this->left) this->left->insert(newnode);
+        if(this->left) return this->left->insert(newnode);
         else{
           this->left=newnode;
           newnode->parent=this;
-          return adjust(newnode);
+          return fixup(newnode); // return the new root
         }
       }else{
-        if(this->right) this->right->insert(newnode);
+        if(this->right) return this->right->insert(newnode);
         else{
           this->right=newnode;
           newnode->parent=this;
-          return adjust(newnode);
+          return fixup(newnode);
         }
       }
-      return this;
     }
 
     //left rotate
-    //   A       ->        R
-    // L   R             A
-    //                 L
+    /*
+     *     P              P
+     *     A       ->     R
+     *   L   R           A
+     *                 L
+     * */
+
     red_black_node* left_rotate(){
       auto parent = this->parent;
-      if(parent && parent->left == this) parent->left=this->right;
-      if(parent && parent->right == this) parent->right =this->right;
+      if(parent && parent->left == this) parent->left = this->right;
+      if(parent && parent->right == this) parent->right = this->right;
 
-      this->parent= this->right;
+      this->parent = this->right;
       this->right->parent = parent;
 
-      auto temp=this->right->left;
-      this->right->left=this;
-      this->right=temp;
-
+      auto temp= this->right->left;
+      this->right->left = this;
+      this->right = temp;
       return this;
     }
 
-    //reverse leftrotate
+    //right rotate
+    //reverse left_rotate
     red_black_node* right_rotate(){
       auto parent = this->parent;
-      if(parent && this == parent->left) parent->left = this->left;
-      if(parent && this == parent->right) parent->right = this->left;
+      if(parent && parent->left) parent->left = this->left;
+      if(parent && parent->right) parent->right = this->left;
 
       this->parent = this->left;
-      this->left->parent=parent;
+      this->left->parent = parent;
+
       auto temp = this->left->right;
-      this->left->right= this;
+      this->left->right = this;
       this->left = temp;
       return this;
     }
 
-    red_black_node* adjust(red_black_node* newnode){
+    red_black_node* fixup(red_black_node* newnode){
       auto current = newnode;
-      // the current's color is red!
-      while(current->parent && current->parent->color ==RED){
+      //the current's color is red
+      while(current->parent && current->parent->color == RED){
         auto parent = current->parent;
-        auto g =current->parent->parent; // parent is not null
+        auto g = parent->parent ; // parent is not null and color is red -> g is not null
 
-        if(g->left==parent){
-          if(g->right && g->right->color ==RED){
+        if(g->left == parent){
+          if(g->right && g->right->color == RED){
             //case 1
             g->right->color=BLACK;
             parent->color=BLACK;
             g->color=RED;
-            current = g;
+            current=g;
           }else{
             //case 2
-            if(current == parent->right) parent->left_rotate();
-            /*    g                 p
-             *   p    ->          a    g
-             *  a
-             * */
-            g->color=RED;
-            parent->color=BLACK;
-            g->right_rotate(); // that's right
+            if(this == parent->right){
+              parent->left_rotate();
+              current=parent;
+            }else{
+              /*
+               *   G           P
+               *  P    ->    A   G
+               * A
+               * */
+              g->right_rotate();
+              g->color=RED;
+              parent->color=BLACK; // that's right
+            }
           }
         }else{
-          if(g->left && g->left->color==RED){
+          if(g->left && g->left->color == RED){
             //case 3
-            g->left->color =BLACK;
-            parent->color=BLACK;
-            g->color=RED;
-            current =g;
+            g->left->color = BLACK;
+            parent->color = BLACK;
+            g->color =RED;
+            current = g;
           }else{
             //case 4
             //reverse case 2
-            g->color=RED;
-            parent->color=BLACK;
-            g->left_rotate();
+            
+            if(this == parent->left){
+              parent->right_rotate();
+              current=parent;
+            }else{
+              g->left_rotate();
+              g->color=RED;
+              parent->color=BLACK;
+            }
           }
         }
       }
+
       auto root = current;
-      while(root->parent) root=root->parent;
+      while(root->parent) root = root->parent;
       root->color=BLACK;
+
       return root; // the new root
     }
-
 };
+
