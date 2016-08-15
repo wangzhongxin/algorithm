@@ -80,8 +80,8 @@ class red_black_node{
     //reverse left_rotate
     red_black_node* right_rotate(){
       auto parent = this->parent;
-      if(parent && parent->left) parent->left = this->left;
-      if(parent && parent->right) parent->right = this->left;
+      if(parent && parent->left == this) parent->left = this->left;
+      if(parent && parent->right == this) parent->right = this->left;
 
       this->parent = this->left;
       this->left->parent = parent;
