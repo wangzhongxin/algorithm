@@ -11,3 +11,4 @@ The ropository is my edit some algorithm code.
 * `BinarySearch` [./binary-tree/binary-sort.cpp](https://github.com/wangzhongxin/algorithm/blob/master/binary-tree/binary-sort.cpp)
 * `Dijkstra` [./map/Dijkstra.cpp](https://github.com/wangzhongxin/algorithm/blob/master/map/Dijkstra.cpp)
 * `simple-neural-network.cpp` [./NeuralNetwork/simple-neural-network.cpp](https://github.com/wangzhongxin/algorithm/blob/master/NeuralNetwork/simple-neural-network.cpp)
+* `MergeSort` [./merge_sort.cpp](https://github.com/wangzhongxin/algorithm/blob/master/merge_sort.cpp) 
