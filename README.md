@@ -6,6 +6,7 @@ The ropository is my edit some algorithm code.
 ## Algorithm list
 
 * `KMP` [./KMP.cpp](https://github.com/wangzhongxin/algorithm/blob/master/KMP.cpp)
+* `sum-count` [./sum-count.c](https://github.com/wangzhongxin/algorithm/blob/master/sum-count.c)
 * `InsertSort` [./InsertSort.cpp](https://github.com/wangzhongxin/algorithm/blob/master/InsertSort.cpp)
 * `mergeSort` [./merge_sort.cpp](https://github.com/wangzhongxin/algorithm/blob/master/merge_sort.cpp)
 * `QuickSort` [./QuickSort.cpp](https://github.com/wangzhongxin/algorithm/blob/master/QuickSort.cpp)
