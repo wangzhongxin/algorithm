@@ -1,5 +1,6 @@
 # include <iostream>
 # include <vector>
+# include <stack>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ void ccount(vector<int>& array,vector<int>& stack,int deep)  {
   }
   else{
     for(const int i : array){
-      stack.push_back(i);
+      stack.push_back(temp.back());
       temp.pop_back();
       ccount(temp,stack,deep-1);
       stack.pop_back();
