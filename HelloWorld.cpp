@@ -5,5 +5,5 @@ using namespace std;
 int main()
 {
          std::cout<<"hello world!";
-	return EXIT_SUCCESS;
+	 return EXIT_SUCCESS;
 }
