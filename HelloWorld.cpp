@@ -1,9 +1,7 @@
 #include <iostream>
-#include <cstdlib>
 using namespace std;
 
-int main()
+void main()
 {
 	cout<<"hello world!";
-	return EXIT_SUCCESS;
 }
